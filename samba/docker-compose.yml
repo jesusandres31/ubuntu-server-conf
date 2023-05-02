@@ -1,0 +1,15 @@
+version: "3.4"
+
+services:
+  samba:
+    image: lordpedal/samba
+    container_name: samba
+    ports:
+      - "137:137/udp"
+      - "138:138/udp"
+      - "139:139/tcp"
+      - "445:445/tcp"
+    restart: always
+    volumes:
+      - /home/shared:/lordpedal # ${your/path}:/lordpedal
+
