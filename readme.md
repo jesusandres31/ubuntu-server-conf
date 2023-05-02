@@ -1,16 +1,42 @@
 # Ubuntu Server Configurations
 
+## Update the system packages and software to their latest versions:
+
+```
+sudo apt update
+sudo apt upgrade
+```
+
+<hr/>
+
+## Secure your server by configuring the firewall and enabling secure SSH access:
+
+```
+sudo ufw disable
+sudo ufw status
+sudo ufw enable
+```
+
+<hr/>
+
 ## Install git:
+
+```
+sudo apt install git
+git --version
+```
 
 <hr/>
 
 ## Install Docker and Docker Compose:
 
+[https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+
 <hr/>
 
 ## Networking:
 
-- sudo cat /etc/netplan/00-installer-config-wifi.yaml
+`sudo cat /etc/netplan/00-installer-config-wifi.yaml`
 
 ```
 network:
@@ -28,7 +54,7 @@ network:
           password: ComedownMachine80
 ```
 
-- sudo cat /etc/netplan/00-installer-config.yaml
+`sudo cat /etc/netplan/00-installer-config.yaml`
 
 ```
 network:
@@ -43,7 +69,8 @@ network:
         addresses: [8.8.8.8, 8.8.4.4]
 ```
 
-- sudo netplan try
+`- udo netplan try
+
 - sudo netplan apply
 
 <hr/>
@@ -52,7 +79,7 @@ network:
 
 - sudo useradd poli -G sudo
 - sudo visudo
-- poli ALL=(ALL) NOPASSWD: ALL
+- add line: `poli ALL=(ALL) NOPASSWD: ALL`
 
 <hr/>
 
@@ -83,8 +110,10 @@ network:
 
 ## Change root passwd:
 
-- su
-- passwd
+```
+su
+passwd
+```
 
 <hr/>
 
