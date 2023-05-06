@@ -1,4 +1,5 @@
 version: "3.3"
+
 services:
   wireguard:
     image: linuxserver/wireguard
@@ -10,11 +11,11 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Mendoza
-      - SERVERURL=poliserv.cloudns.nz #optional
-      - SERVERPORT=51820 #optional
-      - PEERS=2 #optional
-      #- PEERDNS=auto #optional
-      #- INTERNAL_SUBNET=10.13.13.0 #optional
+      - SERVERURL=${PATH} # optional
+      - SERVERPORT=51820 # optional
+      - PEERS=4 # optional
+      #- PEERDNS=auto # optional
+      #- INTERNAL_SUBNET=10.13.13.0 # optional
     volumes:
       - /root/wireguard:/config
       - /lib/modules:/lib/modules

@@ -11,5 +11,4 @@ services:
       - "445:445/tcp"
     restart: always
     volumes:
-      - /home/shared:/lordpedal # ${your/path}:/lordpedal
-
+      - ${PATH}:/lordpedal

@@ -138,7 +138,8 @@ _/5 _ \* \* \* wget -P /home/poli/cloudns.net -q --read-timeout=0.0 --waitretry=
 ### Clean log folder:
 
 ```
-0 _/3 _ \* _ rm -r /home/poli/cloudns.net/_
+0 */3 * * * rm -r /home/poli/cloudns.net/* && touch /home/poli/cloudns.net/.gitkeep
+
 ```
 
 - crontab -l
