@@ -51,7 +51,7 @@ network:
         addresses: [8.8.8.8, 8.8.4.4]
       access-points:
         Fibertel WiFi206 2.4GHz:
-          password: ComedownMachine80
+          password: wifipassword
 ```
 
 `sudo cat /etc/netplan/00-installer-config.yaml`
