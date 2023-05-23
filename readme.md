@@ -69,7 +69,7 @@ network:
         addresses: [8.8.8.8, 8.8.4.4]
 ```
 
-`- udo netplan try
+- sudo netplan try
 
 - sudo netplan apply
 
