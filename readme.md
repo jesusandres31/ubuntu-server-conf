@@ -9,6 +9,26 @@ sudo apt upgrade
 
 <hr/>
 
+## Create user:
+
+- adduser youruser
+
+### And to sudoers and disable root:
+
+```
+usermod -aG sudo youruser
+```
+
+or
+
+```
+sudo useradd youruser -G sudo
+sudo visudo
+- add line: `youruser ALL=(ALL) NOPASSWD: ALL`
+```
+
+<hr/>
+
 ## Secure your server by configuring the firewall and enabling secure SSH access:
 
 ```
@@ -75,14 +95,6 @@ network:
 
 <hr/>
 
-## Add user to sudoers and disable root:
-
-- sudo useradd poli -G sudo
-- sudo visudo
-- add line: `poli ALL=(ALL) NOPASSWD: ALL`
-
-<hr/>
-
 ## Disable root:
 
 - sudo passwd -l root
@@ -132,13 +144,13 @@ passwd
 ### Set cloudns.net script:
 
 ```
-_/5 _ \* \* \* wget -P /home/poli/cloudns.net -q --read-timeout=0.0 --waitretry=5 --tries=400 --background https://ipv4.cloudns.net/api/dynamicURL/?q=<YOUR_TOKEN>
+_/5 _ \* \* \* wget -P /home/youruser/cloudns.net -q --read-timeout=0.0 --waitretry=5 --tries=400 --background https://ipv4.cloudns.net/api/dynamicURL/?q=<YOUR_TOKEN>
 ```
 
 ### Clean log folder:
 
 ```
-0 */3 * * * rm -r /home/poli/cloudns.net/* && touch /home/poli/cloudns.net/.gitkeep
+0 */3 * * * rm -r /home/youruser/cloudns.net/* && touch /home/youruser/cloudns.net/.gitkeep
 
 ```
 
