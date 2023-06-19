@@ -157,3 +157,21 @@ _/5 _ \* \* \* wget -P /home/youruser/cloudns.net -q --read-timeout=0.0 --waitre
 - crontab -l
 
 <hr/>
+
+## Install Nginx:
+
+[https://www.nginx.com/](https://www.nginx.com/)
+
+<hr/>
+
+## Install Certbot
+
+[https://certbot.eff.org/](https://certbot.eff.org/)
+
+<hr/>
+
+## Setup Cloudflare DDNS:
+
+[https://dash.cloudflare.com/](https://dash.cloudflare.com/)
+
+<hr/>
