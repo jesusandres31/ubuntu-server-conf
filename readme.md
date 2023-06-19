@@ -37,6 +37,14 @@ sudo ufw status
 sudo ufw enable
 ```
 
+### Open ports:
+
+```
+
+sudo ufw allow <PORT>/<PROTOCOL>
+sudo ufw reload
+```
+
 <hr/>
 
 ## Install git:
