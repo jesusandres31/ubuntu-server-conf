@@ -19,6 +19,9 @@ def move_new_folders():
             shutil.move(folder_path, destination_path)
             print(f"Folder '{folder}' moved to '{destination_path}'")
 
+            os.chmod(destination_path, 0o777)
+            print(f"Permissions assigned to '{destination_path}'")
+
 while True:
     move_new_folders()
     time.sleep(60)
