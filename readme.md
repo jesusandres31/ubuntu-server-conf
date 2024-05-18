@@ -1,4 +1,4 @@
-# Ubuntu Server Configurations
+# My Ubuntu Server config for Raspberry Pi 🐧🖥🍓
 
 ## Update the system packages and software to their latest versions:
 
@@ -60,7 +60,7 @@ network:
   wifis:
     wlp1s0:
       dhcp4: no
-      addresses: [192.168.0.102/24]
+      addresses: [192.168.0.100/24]
       gateway4: 192.168.0.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
@@ -78,7 +78,7 @@ network:
   ethernets:
     enp2s0: # Change this to your interface name
       dhcp4: no
-      addresses: [192.168.0.101/24]
+      addresses: [192.168.0.100/24]
       gateway4: 192.168.0.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
@@ -131,37 +131,3 @@ sudo systemctl restart sshd
 ## Install Docker and Docker Compose:
 
 [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
-
-## Set crontab for cloudns.net:
-
-```sh
-sudo crontab -e
-```
-
-### Set cloudns.net script:
-
-```sh
-_/5 _ \* \* \* wget -P /home/youruser/cloudns.net -q --read-timeout=0.0 --waitretry=5 --tries=400 --background https://ipv4.cloudns.net/api/dynamicURL/?q=<YOUR_TOKEN>
-```
-
-#### Clean log folder:
-
-```sh
-0 */3 * * * rm -r /home/youruser/cloudns.net/* && touch /home/youruser/cloudns.net/.gitkeep
-```
-
-```sh
-crontab -l
-```
-
-## Install Nginx:
-
-[https://www.nginx.com/](https://www.nginx.com/)
-
-## Install Certbot
-
-[https://certbot.eff.org/](https://certbot.eff.org/)
-
-## Setup Cloudflare DDNS:
-
-[https://dash.cloudflare.com/](https://dash.cloudflare.com/)
