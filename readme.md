@@ -95,16 +95,6 @@ sudo netplan apply
 sudo passwd -l root
 ```
 
-## install fail2ban:
-
-```sh
-sudo apt-get update && sudo apt-get install -y fail2ban
-sudo systemctl start fail2ban
-sudo systemctl enable fail2ban
-sudo systemctl status fail2ban
-sudo tail -f /var/log/fail2ban.log
-```
-
 ## Avoid turn off on lid close:
 
 ````sh
