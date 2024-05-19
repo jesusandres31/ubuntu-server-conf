@@ -89,26 +89,14 @@ sudo netplan try
 sudo netplan apply
 ```
 
-## Disable root:
+## Disable root and change psswd:
 
 ```sh
 sudo passwd -l root
-```
 
-## Avoid turn off on lid close:
-
-````sh
-sudo nano /etc/systemd/logind.conf
-# set: `HandleLidSwitch=suspend -> HandleLidSwitch=ignore`
-sudo systemctl restart systemd-logind.service
-```sh
-
-## Change root passwd:
-
-```sh
 su
 passwd
-````
+```
 
 ## Change default SSH port:
 
