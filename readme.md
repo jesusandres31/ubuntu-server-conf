@@ -109,3 +109,27 @@ sudo systemctl restart sshd
 ## Install Docker and Docker Compose:
 
 [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+
+## UFW conf:
+
+```ssh
+sudo ufw status
+sudo ufw show added
+sudo ufw enable
+sudo ufw allow ssh
+```
+
+## Mount Disk:
+
+```sh
+sudo lsblk
+
+mkdir /mnt/ssd
+
+sudo mount /dev/sda1 /mnt/ssd
+
+df -h
+
+sudo nano /etc/fstab
+UUID=776A-91B4  /mnt/ssd  exfat  defaults  0  2 # add this line
+```
