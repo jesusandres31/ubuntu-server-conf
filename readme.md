@@ -51,7 +51,24 @@ sudo ufw reload
 
 ## Networking:
 
-`sudo cat /etc/netplan/00-installer-config-wifi.yaml`
+`sudo nano /etc/netplan/50-cloud-init.yaml`
+
+```yaml
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0: # Change this to your interface name
+      dhcp4: no
+      addresses: [192.168.0.100/24]
+      gateway4: 192.168.0.1
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]
+```
+
+`sudo nano /etc/netplan/00-installer-config-wifi.yaml`
 
 ```yaml
 network:
@@ -67,21 +84,6 @@ network:
       access-points:
         Fibertel WiFi206 2.4GHz:
           password: wifipassword
-```
-
-`sudo cat /etc/netplan/00-installer-config.yaml`
-
-```yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp2s0: # Change this to your interface name
-      dhcp4: no
-      addresses: [192.168.0.100/24]
-      gateway4: 192.168.0.1
-      nameservers:
-        addresses: [8.8.8.8, 8.8.4.4]
 ```
 
 ```sh
@@ -106,10 +108,6 @@ sudo nano /etc/ssh/sshd_config
 sudo systemctl restart sshd
 ```
 
-## Install Docker and Docker Compose:
-
-[https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
-
 ## UFW conf:
 
 ```ssh
@@ -126,10 +124,28 @@ sudo lsblk
 
 mkdir /mnt/ssd
 
-sudo mount /dev/sda1 /mnt/ssd
+sudo mount /dev/sd<> /mnt/ssd
 
 df -h
 
+sudo blkid
+
 sudo nano /etc/fstab
-UUID=776A-91B4  /mnt/ssd  exfat  defaults  0  2 # add this line
+UUID=<DISK_ID>  /mnt/ssd  exfat  defaults  0  1 # add this line
+
+sudo mount -a
+
+sudo systemctl daemon-reload
+
+sudo reboot
+```
+
+## Install Docker and Docker Compose:
+
+[https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+
+## Turn off
+
+```sh
+sudo shutdown -h now
 ```
