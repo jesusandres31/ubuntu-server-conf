@@ -10,10 +10,10 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Mendoza
-      - SERVERURL=${PATH} # optional
+      - TZ=America/Argentina/Buenos_Aires
+      - SERVERURL=${PATH}
       - SERVERPORT=51820 # optional
-      - PEERS=4 # optional
+      - PEERS=6 # optional
       #- PEERDNS=auto # optional
       #- INTERNAL_SUBNET=10.13.13.0 # optional
     volumes:
