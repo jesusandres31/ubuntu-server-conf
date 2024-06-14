@@ -1,4 +1,4 @@
-# My Ubuntu Server config for Raspberry Pi 🐧🖥🍓
+# My Ubuntu Server config for Raspberry Pi 🍓🐧
 
 ## Update the system packages and software to their latest versions:
 
