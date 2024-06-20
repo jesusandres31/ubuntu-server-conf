@@ -13,6 +13,8 @@ nmap 192.168.0.104
 
 - Create a file named "ssh" on the boot partition.
 
+- `sudo systemctl enable ssh`
+
 ### Network and Storage scripts:
 
 ```sh
