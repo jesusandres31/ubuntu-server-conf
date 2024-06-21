@@ -13,26 +13,25 @@ nmap 192.168.0.104
 
 - Create a file named "ssh" on the boot partition.
 
-- `sudo systemctl enable ssh`
+- Enable ssh on start: `sudo systemctl enable ssh`
 
-### Network and Storage scripts:
+- Check status: `sudo systemctl status ssh`
 
-```sh
-sudo sh congf/network.sh
-sudo sh congf/storage.sh
-```
+### Setup scripts:
+
+- Run the network script first: `sudo sh congf/network.sh`
+
+- Run the storage script then: `sudo sh congf/storage.sh`
 
 ### Docker:
 
-[https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
+- Install Docker: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
 - Execute docker containers.
 
 ### Rclone:
 
-```sh
-# todo
-```
+- todo
 
 ## Commands:
 
