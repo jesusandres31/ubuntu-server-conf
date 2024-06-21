@@ -1,5 +1,21 @@
-# create rclone config file in the host
+# install
 
-docker run -it -v ~/.config/rclone:/config/rclone rclone/rclone:beta config
+https://rclone.org/install/
 
-sudo chmod 0644 .config/rclone/rclone.conf
+# config
+
+rclone config
+
+ls ~/.config/rclone/rclone.conf
+
+rclone listremotes
+
+rclone lsf mega:MEGASync --dirs-only
+
+# sync
+
+test:
+rclone sync --dry-run /mnt/ssd/smb/MEGASync mega:MEGASync
+
+sync:
+rclone sync /mnt/ssd/smb/MEGASync mega:MEGASync
