@@ -29,10 +29,6 @@ nmap 192.168.0.104
 
 - Execute docker containers.
 
-### Rclone:
-
-- todo
-
 ## Commands:
 
 ```sh
