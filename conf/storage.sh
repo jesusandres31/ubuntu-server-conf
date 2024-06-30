@@ -14,9 +14,8 @@ df -h
 # Automatic Mounting at System Startup
 echo "Configuring automatic mounting at startup..."
 sudo cp /etc/fstab /etc/fstab.bak
-UUID=$(sudo blkid -s UUID -o value $PARTITION)
-
-echo "UUID=$UUID $MOUNT_POINT exfat defaults 0 2" | sudo tee -a /etc/fstab
+sudo sed -i "\|$PARTITION|d" /etc/fstab
+echo "$PARTITION $MOUNT_POINT exfat defaults,fmask=0000,dmask=0000 0 0" | sudo tee -a /etc/fstab
 
 sudo mount -a
 sudo reboot
