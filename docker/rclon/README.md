@@ -4,18 +4,32 @@ https://rclone.org/install/
 
 # config
 
+```sh
 rclone config
 
 ls ~/.config/rclone/rclone.conf
 
 rclone listremotes
 
-rclone lsf mega:MEGASync --dirs-only
+rclone lsf mega:sync --dirs-only
 
-# sync
+rclone ls mega: --max-depth 1
 
-test:
-rclone sync --dry-run /mnt/ssd/smb/MEGASync mega:MEGASync
+# test
+rclone copy /mnt/ssd/smb/sync mega:sync --ignore-existing --dry-run --progress -vv
 
-sync:
-rclone sync /mnt/ssd/smb/MEGASync mega:MEGASync
+# copy
+rclone copy /mnt/ssd/smb/sync mega:sync --ignore-existing --progress -vv
+```
+
+# crontab
+
+```sh
+chmod +x sync_rclone.sh
+
+crontab -e
+
+0 3 * * * /home/tu_usuario/sync_rclone.sh
+
+crontab -l
+```
