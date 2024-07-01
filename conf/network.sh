@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Load .env file
+if [ -f ".env" ]; then
+    export $(grep -v '^#' .env | xargs)
+else
+    echo ".env file not found."
+    exit 1
+fi
+
 # Check for root privileges
 if [[ $EUID -ne 0 ]]; then
    echo "This script must be run as root" 
@@ -28,6 +36,13 @@ fi
 NETPLAN_CONFIG="/etc/netplan/50-cloud-init.yaml"
 CLOUD_CFG="/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"
 
+if [ -z "$RASPI" ]; then
+    echo "RASPI variable not set in .env file."
+    exit 1
+fi
+
+IP_ADDRESS="192.168.0.10${RASPI}/24"
+
 echo "Configuring networking..."
 sudo bash -c "cat > $NETPLAN_CONFIG" <<EOF
 network:
@@ -36,7 +51,7 @@ network:
   ethernets:
     eth0:
       dhcp4: no
-      addresses: [192.168.0.104/24]
+      addresses: [${IP_ADDRESS}]
       gateway4: 192.168.0.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
