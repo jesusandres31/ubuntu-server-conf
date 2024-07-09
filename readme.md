@@ -1,4 +1,4 @@
-# 🐧 Ubuntu Server config for Raspberry Pi 🍓
+# 🐧 Ubuntu Server config
 
 ## Find Raspberry Pi with nmap:
 
@@ -13,21 +13,46 @@ nmap 192.168.0.101
 
 - Create a file named "ssh" on the boot partition.
 
-- Enable ssh on start: `sudo systemctl enable ssh`
+- Enable ssh on start and check status:
 
-- Check status: `sudo systemctl status ssh`
+```sh
+sudo systemctl enable ssh
+sudo systemctl status ssh
+```
 
 ### Setup scripts:
 
-- Run the network script first: `sudo sh congf/network.sh`
+1. Run the network script first:
 
-- Run the storage script then: `sudo sh congf/storage.sh`
+- For Raspberry Pi:
+
+```sh
+sudo sh congf/raspberry/network.sh
+```
+
+- For notebook:
+
+```sh
+sudo sh congf/notebook/network.sh
+```
+
+2. Run the lid script for notebook (if applicable):
+
+```sh
+sudo sh congf/notebook/lid.sh
+```
+
+3. Run the storage script:
+
+```sh
+sudo sh config/storage.sh
+```
 
 ### Docker:
 
 - Install Docker: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
-- Execute docker containers.
+- Execute Docker containers.
 
 ## Commands:
 
