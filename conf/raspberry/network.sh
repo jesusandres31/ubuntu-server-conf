@@ -1,17 +1,23 @@
 #!/bin/bash
 
-# Load .env file
-if [ -f ".env" ]; then
-    export $(grep -v '^#' .env | xargs)
-else
-    echo ".env file not found."
-    exit 1
+# Get the directory where the script is located
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+# Path to the .env file
+ENV_FILE="$SCRIPT_DIR/.env"
+
+# Load environment variables from the .env file
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Error: .env file not found in $SCRIPT_DIR."
+  exit 1
 fi
 
-# Check for root privileges
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 
-   exit 1
+export $(grep -v '^#' "$ENV_FILE" | xargs)
+
+# Ensure the RASPI environment variables are set
+if [ -z "$RASPI" ]; then
+  echo "Error: RASPI environment variables must be set."
+  exit 1
 fi
 
 # Update the system packages and software to their latest versions

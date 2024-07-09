@@ -1,12 +1,18 @@
 #!/bin/bash
 
-# load .env
-if [ ! -f .env ]; then
-  echo "Error: .env file not found."
+# Get the directory where the script is located
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+# Path to the .env file
+ENV_FILE="$SCRIPT_DIR/.env"
+
+# Load environment variables from the .env file
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Error: .env file not found in $SCRIPT_DIR."
   exit 1
 fi
 
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' "$ENV_FILE" | xargs)
 
 # Ensure the WIFI_PASSWORD and WIFI_NETWORK environment variables are set
 if [ -z "$WIFI_PASSWORD" ] || [ -z "$WIFI_NETWORK" ]; then
