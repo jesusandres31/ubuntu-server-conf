@@ -29,7 +29,7 @@ chmod +x sync_rclone.sh
 
 crontab -e
 
-0 3 * * * /home/poli/raspberry-ubuntu-server/docker/rclon/sync_rclone.sh
+0 3 * * * /home/poli/ubuntu-server-conf/docker/rclon/sync_rclone.sh
 
 crontab -l
 ```
