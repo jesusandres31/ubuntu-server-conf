@@ -33,13 +33,13 @@ sudo sh conf/raspberry/network.sh
 - For notebook:
 
 ```sh
-sudo sh cogf/notebook/network.sh
+sudo sh conf/notebook/network.sh
 ```
 
 2. Run the lid script for notebook (if applicable):
 
 ```sh
-sudo sh cogf/notebook/lid.sh
+sudo sh conf/notebook/lid.sh
 ```
 
 3. Run the storage script:
