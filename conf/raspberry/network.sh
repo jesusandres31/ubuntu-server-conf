@@ -57,8 +57,17 @@ network:
         addresses: [8.8.8.8, 8.8.4.4]
 EOF
 
+cat /etc/netplan/50-cloud-init.yaml
+echo "Networking configuration updated."
+
 sudo bash -c "cat > $CLOUD_CFG" <<EOF
 network: { config: disabled }
 EOF
+
+cat /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg
+echo "cloud.cfg.d configuration updated."
+
+cat /etc/netplan/00-installer-config-wifi.yaml
+echo "Wifi configuration updated."
 
 sudo netplan apply
