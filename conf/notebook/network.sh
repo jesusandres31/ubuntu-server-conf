@@ -64,4 +64,4 @@ EOL
 cat /etc/netplan/00-installer-config.yaml
 echo "Ethernet configuration updated."
 
-sudo netplan apply 
+sudo netplan try  

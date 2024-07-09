@@ -76,4 +76,4 @@ echo "cloud.cfg.d configuration updated."
 cat /etc/netplan/00-installer-config-wifi.yaml
 echo "Wifi configuration updated."
 
-sudo netplan apply
+sudo netplan try 
