@@ -12,7 +12,10 @@ if [ ! -f "$ENV_FILE" ]; then
   exit 1
 fi
 
-export $(grep -v '^#' "$ENV_FILE" | xargs)
+# Source the .env file to load environment variables
+set -o allexport
+source "$ENV_FILE"
+set +o allexport
 
 # Ensure the WIFI_PASSWORD and WIFI_NETWORK environment variables are set
 if [ -z "$WIFI_PASSWORD" ] || [ -z "$WIFI_NETWORK" ]; then
