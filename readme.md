@@ -22,37 +22,31 @@ sudo systemctl status ssh
 
 ### Setup scripts:
 
-1. Run the network script first:
-
-- For Raspberry Pi:
+1. Run the setup script:
 
 ```sh
-sudo bash conf/raspberry/network.sh
+sudo bash conf/setup.sh
 ```
 
-- For netbook:
+1. Run the network script:
 
 ```sh
+# For Raspberry Pi:
+sudo bash conf/raspberry/network.sh
+
+# For netbook:
 sudo bash conf/netbook/network.sh
 ```
 
-2. Run the lid script for netbook (if applicable):
-
-```sh
-sudo bash conf/netbook/lid.sh
-```
-
-3. Run the storage script:
+1. Run the storage script:
 
 ```sh
 sudo bash config/storage.sh
 ```
 
-### Docker:
+### Install Docker:
 
-- Install Docker: [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
-
-- Execute Docker containers.
+- [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
 ## Commands:
 
