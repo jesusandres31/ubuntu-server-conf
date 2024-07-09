@@ -15,9 +15,9 @@ services:
       - PEERPORT= #optional
       - HOST_WHITELIST= #optional
     volumes:
-      - /home/transmission/data:/config
-      - /home/transmission/downloads:/downloads
-      - /home/transmission/watch:/watch
+      - /mnt/ssd/smb/transmission/data:/config
+      - /mnt/ssd/smb/transmission/downloads:/downloads
+      - /mnt/ssd/smb/transmission/watch:/watch
     ports:
       - 9091:9091
       - 51413:51413
