@@ -1,4 +1,4 @@
-# 🐧 Ubuntu Server config
+# 🐧 Ubuntu Server Conf
 
 ## Find Raspberry Pi with nmap:
 
