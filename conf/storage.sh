@@ -22,4 +22,4 @@ cat /etc/fstab
 echo "done..."
 
 sudo mount -a
-sudo reboot
+sudo reboot now
