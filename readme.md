@@ -27,25 +27,25 @@ sudo systemctl status ssh
 - For Raspberry Pi:
 
 ```sh
-sudo sh conf/raspberry/network.sh
+sudo bash conf/raspberry/network.sh
 ```
 
 - For notebook:
 
 ```sh
-sudo sh conf/notebook/network.sh
+sudo bash conf/notebook/network.sh
 ```
 
 2. Run the lid script for notebook (if applicable):
 
 ```sh
-sudo sh conf/notebook/lid.sh
+sudo bash conf/notebook/lid.sh
 ```
 
 3. Run the storage script:
 
 ```sh
-sudo sh config/storage.sh
+sudo bash config/storage.sh
 ```
 
 ### Docker:

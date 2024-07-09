@@ -53,7 +53,7 @@ network:
   version: 2
   renderer: networkd
   ethernets:
-    enp2s0:  # Cambiar esto por el nombre de tu interfaz
+    enp2s0:
       dhcp4: no
       addresses: [192.168.0.101/24]
       gateway4: 192.168.0.1
