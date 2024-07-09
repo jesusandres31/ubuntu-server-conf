@@ -30,16 +30,16 @@ sudo systemctl status ssh
 sudo bash conf/raspberry/network.sh
 ```
 
-- For notebook:
+- For netbook:
 
 ```sh
-sudo bash conf/notebook/network.sh
+sudo bash conf/netbook/network.sh
 ```
 
-2. Run the lid script for notebook (if applicable):
+2. Run the lid script for netbook (if applicable):
 
 ```sh
-sudo bash conf/notebook/lid.sh
+sudo bash conf/netbook/lid.sh
 ```
 
 3. Run the storage script:
