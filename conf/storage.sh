@@ -17,5 +17,9 @@ sudo cp /etc/fstab /etc/fstab.bak
 sudo sed -i "\|$PARTITION|d" /etc/fstab
 echo "$PARTITION $MOUNT_POINT exfat defaults,fmask=0000,dmask=0000 0 0" | sudo tee -a /etc/fstab
 
+cat /etc/fstab
+
+echo "done..."
+
 sudo mount -a
 sudo reboot
