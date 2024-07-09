@@ -27,19 +27,19 @@ sudo systemctl status ssh
 - For Raspberry Pi:
 
 ```sh
-sudo sh congf/raspberry/network.sh
+sudo sh conf/raspberry/network.sh
 ```
 
 - For notebook:
 
 ```sh
-sudo sh congf/notebook/network.sh
+sudo sh cogf/notebook/network.sh
 ```
 
 2. Run the lid script for notebook (if applicable):
 
 ```sh
-sudo sh congf/notebook/lid.sh
+sudo sh cogf/notebook/lid.sh
 ```
 
 3. Run the storage script:
