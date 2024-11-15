@@ -35,7 +35,7 @@ network:
   wifis:
     wlp1s0:
       dhcp4: no
-      addresses: [192.168.0.102/24]
+      addresses: [192.168.0.101/24]
       gateway4: 192.168.0.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
@@ -55,7 +55,7 @@ network:
   ethernets:
     enp2s0:
       dhcp4: no
-      addresses: [192.168.0.101/24]
+      addresses: [192.168.0.102/24]
       gateway4: 192.168.0.1
       nameservers:
         addresses: [8.8.8.8, 8.8.4.4]
