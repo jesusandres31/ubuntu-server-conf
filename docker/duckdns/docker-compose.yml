@@ -7,7 +7,7 @@ services:
       - PUID=1000 #optional
       - PGID=1000 #optional
       - TZ=America/Argentina/Buenos_Aires
-      - SUBDOMAINS=poli-pi.duckdns.org
+      - SUBDOMAINS=${SUBDOMAINS}
       - TOKEN=${TOKEN}
       - LOG_FILE=false #optional
     # volumes:
