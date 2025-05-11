@@ -30,6 +30,7 @@ services:
 
     image: ghcr.io/wg-easy/wg-easy:14
     container_name: wg-easy
+    privileged: true # necesary for wireguard to create the wg0 interface
     volumes:
       - etc_wireguard:/etc/wireguard
     ports:
