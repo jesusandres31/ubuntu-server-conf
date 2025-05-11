@@ -1,20 +1,17 @@
----
 version: "2.1"
 services:
   openvpn-as:
-    image: lscr.io/linuxserver/openvpn-as
+    image: openvpn/openvpn-as
     container_name: openvpn-as
+    devices:
+      - /dev/net/tun:/dev/net/tun
     cap_add:
       - NET_ADMIN
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=America/Argentina/Buenos_Aires
-      # - INTERFACE=eth0 #optional
-    volumes:
-      - /home/poli/openvpn:/config
+      - MKNOD
     ports:
       - 943:943
-      - 9443:9443
+      - 443:443
       - 1194:1194/udp
+    volumes:
+      - home/poli/openvpn:/openvpn
     restart: unless-stopped
