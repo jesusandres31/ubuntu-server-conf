@@ -30,18 +30,17 @@ services:
 
     image: ghcr.io/wg-easy/wg-easy:14
     container_name: wg-easy
-    network_mode: host
-    # privileged: true # necesary for wireguard to create the wg0 interface
+    privileged: true # necesary for wireguard to create the wg0 interface
     volumes:
       - etc_wireguard:/etc/wireguard
-    # ports:
-    # - "51820:51820/udp"
-    # - "51821:51821/tcp"
+    ports:
+      - "51820:51820/udp"
+      - "51821:51821/tcp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
       # - NET_RAW # ⚠️ Uncomment if using Podman
-    # sysctls:
-    # - net.ipv4.ip_forward=1
-    # - net.ipv4.conf.all.src_valid_mark=1
+    sysctls:
+      - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
