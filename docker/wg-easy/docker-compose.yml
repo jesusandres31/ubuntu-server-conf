@@ -34,8 +34,10 @@ services:
     volumes:
       - etc_wireguard:/etc/wireguard
     ports:
-      - "51820:51820/udp"
-      - "51821:51821/tcp"
+      - "192.168.0.101:51820:51820/udp" # ← Bind Ethernet
+      - "192.168.0.101:51821:51821/tcp" # ← Bind Ethernet
+      # - "51820:51820/udp"
+      # - "51821:51821/tcp"
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
