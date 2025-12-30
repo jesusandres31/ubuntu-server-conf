@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel run home-tunnel
+    volumes:
+      - ./config:/etc/cloudflared
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true

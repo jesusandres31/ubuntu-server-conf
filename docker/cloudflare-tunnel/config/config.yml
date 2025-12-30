@@ -1,0 +1,11 @@
+tunnel: home-tunnel
+credentials-file: /etc/cloudflared/home-tunnel.json
+
+ingress:
+  - hostname: midominio.com
+    service: http://nginx-edge:80
+
+  - hostname: www.midominio.com
+    service: http://nginx-edge:80
+
+  - service: http_status:404

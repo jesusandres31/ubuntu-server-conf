@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-edge
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./conf:/etc/nginx/conf.d:ro
+      - ./html:/usr/share/nginx/html:ro
+      - ./logs:/var/log/nginx
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true
