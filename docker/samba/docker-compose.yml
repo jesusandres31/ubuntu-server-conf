@@ -12,3 +12,4 @@ services:
     restart: always
     volumes:
       - /mnt/ssd/smb:/lordpedal
+    command: '-u "poli;PSSWD" -s "Compartido;/media;yes;no;no;poli"'
