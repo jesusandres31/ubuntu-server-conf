@@ -2,7 +2,7 @@ version: "3.4"
 
 services:
   samba:
-    image: lordpedal/samba
+    image: dperson/samba
     container_name: samba
     ports:
       - "137:137/udp"
@@ -11,4 +11,5 @@ services:
       - "445:445/tcp"
     restart: always
     volumes:
-      - /mnt/ssd/smb:/lordpedal
+      - /mnt/ssd/smb:/media
+    command: '-u "poli;PSSWD" -s "Compartido;/media;yes;no;no;poli"'
