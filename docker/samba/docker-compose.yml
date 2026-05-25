@@ -12,4 +12,4 @@ services:
     restart: always
     volumes:
       - /mnt/ssd/smb:/media
-    command: '-u "poli;PSSWD" -s "Compartido;/media;yes;no;no;poli"'
+    command:  '-u "poli;${PSSWD}" -s "Compartido;/media;yes;no;no;poli"'
