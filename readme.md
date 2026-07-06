@@ -1,54 +1,55 @@
-# 🐧 Ubuntu Server Conf
+# Ubuntu Server Conf
 
-## Find Raspberry Pi with nmap:
+## Find Raspberry Pi
 
 ```sh
 nmap -sn 192.168.0.1/24
 nmap 192.168.0.101
 ```
 
-## Setup:
+## Setup
 
-### SSH:
+### Raspberry Pi
 
-- Create a file named "ssh" on the boot partition.
+```sh
+cp conf/rpi/example.env conf/rpi/.env
+nano conf/rpi/.env
+sudo bash conf/rpi/network.sh
+```
 
-- Enable ssh on start and check status:
+### Storage
+
+```sh
+lsblk -f
+sudo DISK_UUID=<uuid> bash conf/storage.sh
+```
+
+### Docker services
+
+```sh
+cd docker/tailscale
+cp example.env .env
+nano .env
+docker compose up -d
+
+cd ../samba
+cp example.env .env
+nano .env
+docker compose up -d
+```
+
+### SSH
 
 ```sh
 sudo systemctl enable ssh
 sudo systemctl status ssh
 ```
 
-### Setup scripts:
-
-1. Run the setup script:
-
-```sh
-sudo bash conf/setup.sh
-```
-
-1. Run the network script:
-
-```sh
-# For Raspberry Pi:
-sudo bash conf/raspberry/network.sh
-
-# For netbook:
-sudo bash conf/netbook/network.sh
-```
-
-1. Run the storage script:
-
-```sh
-sudo bash config/storage.sh
-```
-
-### Install Docker:
+### Docker install
 
 - [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
-## Commands:
+## Commands
 
 ```sh
 sudo shutdown -h now

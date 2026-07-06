@@ -26,6 +26,6 @@ network:
       nameservers:
         addresses: [1.1.1.1, 8.8.8.8]
       access-points:
-        'WIFI 2.4G':
-          password: 'H8sRfA3pWZ'
+        'WIFI_SSID':
+          password: 'WIFI_PASSWORD'
       optional: true

@@ -1,0 +1,4 @@
+include:
+  - ./tailscale/docker-compose.yml
+  - ./samba/docker-compose.yml
+  - ./netdata/docker-compose.yml
