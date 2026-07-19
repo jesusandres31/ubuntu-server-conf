@@ -25,6 +25,15 @@ Create a remote named:
 mega
 ```
 
+If `Storage> mega` fails with `didn't find backend called "mega"`, quit the interactive prompt with `q` and install the official rclone binary:
+
+```sh
+sudo bash scripts/provision.sh bootstrap
+rclone help backends | grep mega
+```
+
+Then run `rclone config` again.
+
 The interactive flow should be:
 
 ```text

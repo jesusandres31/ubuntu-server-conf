@@ -152,6 +152,7 @@ rclone config
 ```
 
 In the interactive setup, create a remote named `mega` using the Mega backend.
+If rclone says it did not find a backend called `mega`, quit the interactive prompt with `q`, run `sudo bash scripts/provision.sh bootstrap` again to install the official rclone binary, then retry `rclone config`.
 Then verify it:
 
 ```sh

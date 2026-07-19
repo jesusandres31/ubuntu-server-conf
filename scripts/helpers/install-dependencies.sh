@@ -18,7 +18,11 @@ source /etc/os-release
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
-apt-get install -y ca-certificates curl exfatprogs git iproute2 netplan.io openssh-server rclone util-linux
+apt-get install -y ca-certificates curl exfatprogs git iproute2 netplan.io openssh-server unzip util-linux
+
+if ! command -v rclone >/dev/null 2>&1 || ! rclone help backends 2>/dev/null | grep -Eq '(^|[[:space:]])mega($|[[:space:]])'; then
+  curl -fsSL https://rclone.org/install.sh | bash
+fi
 
 if ! docker compose version >/dev/null 2>&1; then
   conflicting_packages=""
