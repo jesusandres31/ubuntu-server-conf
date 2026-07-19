@@ -1,3 +1,4 @@
 .env
 projects/*
 !projects/.gitkeep
+results*.txt
