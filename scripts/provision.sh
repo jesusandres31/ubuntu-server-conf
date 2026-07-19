@@ -15,6 +15,11 @@ Commands:
   storage      Mount the configured data disk and update /etc/fstab
   directories  Create the Samba directory on the data disk
   services     Validate and start the Docker Compose services
+  backup-check Validate the Mega backup configuration
+  backup-dry-run
+               Preview the Mega backup without uploading
+  backup-run   Copy NAS media backup data to Mega
+  backup-timer Install and enable the daily Mega backup timer
   all          Run preflight, storage, directories, and services
   status       Show network, storage, and container status
 
@@ -43,6 +48,18 @@ case "$command_name" in
     ;;
   services)
     exec bash "$HELPERS_DIR/start-services.sh"
+    ;;
+  backup-check)
+    exec bash "$HELPERS_DIR/backup-mega.sh" check
+    ;;
+  backup-dry-run)
+    exec bash "$HELPERS_DIR/backup-mega.sh" dry-run
+    ;;
+  backup-run)
+    exec bash "$HELPERS_DIR/backup-mega.sh" run
+    ;;
+  backup-timer)
+    exec bash "$HELPERS_DIR/install-backup-timer.sh"
     ;;
   all)
     bash "$HELPERS_DIR/preflight.sh"

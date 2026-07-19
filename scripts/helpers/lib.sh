@@ -6,6 +6,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/../.." && pwd)
 CONFIG_FILE="${CONFIG_FILE:-$REPO_ROOT/.env}"
 DOCKER_DIR="$REPO_ROOT/docker"
+BACKUP_DIR="$REPO_ROOT/backup"
 
 die() {
   echo "Error: $*" >&2
@@ -61,6 +62,14 @@ build_compose_env_file() {
   append_env_file "$DOCKER_DIR/netdata/.env" "$compose_env_file"
 
   printf '%s\n' "$compose_env_file"
+}
+
+load_mega_backup_config() {
+  load_config
+  load_env "$BACKUP_DIR/mega/.env.example"
+  if [ -f "$BACKUP_DIR/mega/.env" ]; then
+    load_env "$BACKUP_DIR/mega/.env"
+  fi
 }
 
 timestamp() {

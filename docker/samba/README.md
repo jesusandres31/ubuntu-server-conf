@@ -22,8 +22,7 @@ sudo bash scripts/provision.sh services
 
 ## Windows Cached Credentials
 
-If Windows previously connected to another server at the same IP, it may keep
-old SMB credentials and reject the new share.
+If Windows has cached SMB credentials for this IP, it may reject the new share.
 
 From PowerShell:
 

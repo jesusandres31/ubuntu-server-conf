@@ -10,6 +10,7 @@ It manages:
 - Static Netplan configuration
 - Persistent data-disk mounting
 - Samba, Tailscale, and Netdata containers
+- Mega backup with rclone
 - A local `projects/` directory for custom application repositories
 
 ## 1. Clone
@@ -127,6 +128,56 @@ Netdata is available on port `8080`. Samba publishes the `Compartido` share, and
 If Windows rejects the Samba login after reusing the same server IP, see
 [Samba notes](docker/samba/README.md).
 
+## 8. Configure Mega backup
+
+Follow this section from the root README. The file
+[Mega backup notes](backup/mega/README.md) only has extra details.
+
+The backup source is:
+
+```text
+/mnt/ssd/smb/sync
+```
+
+Create it if it does not exist yet:
+
+```sh
+mkdir -p /mnt/ssd/smb/sync
+```
+
+Configure the Mega remote as the server user, without `sudo`:
+
+```sh
+rclone config
+```
+
+In the interactive setup, create a remote named `mega` using the Mega backend.
+Then verify it:
+
+```sh
+rclone listremotes
+rclone lsd mega:
+```
+
+Now validate and preview the backup:
+
+```sh
+sudo bash scripts/provision.sh backup-check
+sudo bash scripts/provision.sh backup-dry-run
+```
+
+Run it manually:
+
+```sh
+sudo bash scripts/provision.sh backup-run
+```
+
+Enable the daily systemd timer:
+
+```sh
+sudo bash scripts/provision.sh backup-timer
+```
+
 ## Command reference
 
 Use `scripts/provision.sh` as the only entry point. Files under `scripts/helpers/` are internal implementation steps called by that command.
@@ -138,6 +189,10 @@ sudo bash scripts/provision.sh network      # Apply Netplan static network confi
 sudo bash scripts/provision.sh storage      # Add the disk to /etc/fstab and mount it
 sudo bash scripts/provision.sh directories  # Create the Samba share directory
 sudo bash scripts/provision.sh services     # Start Samba, Tailscale, and Netdata
+sudo bash scripts/provision.sh backup-check # Validate rclone Mega backup config
+sudo bash scripts/provision.sh backup-dry-run
+sudo bash scripts/provision.sh backup-run
+sudo bash scripts/provision.sh backup-timer
 sudo bash scripts/provision.sh all          # Run preflight, storage, directories, services
 sudo bash scripts/provision.sh status       # Show network, mount, and container status
 ```
@@ -165,6 +220,7 @@ Everything inside `projects/` is ignored by this repository, except the file tha
 .env.example    Host configuration values
 scripts/        Public provisioning entry point and internal helpers
 docker/         Compose services and per-service env examples
+backup/        Mega backup configuration
 docs/           Recovery instructions
 projects/       Ignored custom application repositories
 ```
