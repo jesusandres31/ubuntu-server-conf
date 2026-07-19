@@ -49,7 +49,7 @@ if mountpoint -q "$MOUNT_POINT"; then
   fi
 else
   echo "Mounting $SOURCE on $MOUNT_POINT"
-  mount -t "$FS_TYPE" "$SOURCE" "$MOUNT_POINT"
+  mount -t "$FS_TYPE" -o "$MOUNT_OPTIONS" "$SOURCE" "$MOUNT_POINT"
 fi
 
 fstab_backup="/etc/fstab.bak.$(timestamp)"

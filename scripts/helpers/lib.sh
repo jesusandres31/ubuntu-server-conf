@@ -5,6 +5,7 @@ set -euo pipefail
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 REPO_ROOT=$(cd -- "$SCRIPT_DIR/../.." && pwd)
 CONFIG_FILE="${CONFIG_FILE:-$REPO_ROOT/.env}"
+DOCKER_DIR="$REPO_ROOT/docker"
 
 die() {
   echo "Error: $*" >&2
@@ -33,6 +34,33 @@ load_env() {
 
 load_config() {
   load_env "$CONFIG_FILE"
+}
+
+append_env_file() {
+  local source_file="$1"
+  local target_file="$2"
+
+  if [ -f "$source_file" ]; then
+    {
+      printf '\n'
+      cat "$source_file"
+    } >> "$target_file"
+  fi
+}
+
+build_compose_env_file() {
+  local compose_env_file
+  compose_env_file=$(mktemp)
+
+  append_env_file "$CONFIG_FILE" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/tailscale/.env.example" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/tailscale/.env" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/samba/.env.example" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/samba/.env" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/netdata/.env.example" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/netdata/.env" "$compose_env_file"
+
+  printf '%s\n' "$compose_env_file"
 }
 
 timestamp() {

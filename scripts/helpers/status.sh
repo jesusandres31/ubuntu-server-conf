@@ -5,6 +5,8 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 # shellcheck source=lib.sh
 source "$SCRIPT_DIR/lib.sh"
 load_config
+compose_env_file=$(build_compose_env_file)
+trap 'rm -f "$compose_env_file"' EXIT
 
 MOUNT_POINT="${MOUNT_POINT:-/mnt/ssd}"
 
@@ -19,9 +21,9 @@ echo
 echo "Docker services:"
 if [ -f "$CONFIG_FILE" ]; then
   docker compose \
-    --project-directory "$REPO_ROOT/docker" \
-    --env-file "$CONFIG_FILE" \
-    -f "$REPO_ROOT/docker/compose.yaml" \
+    --project-directory "$DOCKER_DIR" \
+    --env-file "$compose_env_file" \
+    -f "$DOCKER_DIR/compose.yaml" \
     ps
 else
   echo "$CONFIG_FILE is not configured"

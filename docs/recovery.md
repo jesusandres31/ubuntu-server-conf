@@ -38,8 +38,7 @@ Docker services should remain stopped until `/mnt/ssd` is mounted.
 
 ```sh
 cd ~/ubuntu-server-conf
-docker compose --project-directory docker --env-file .env -f docker/compose.yaml ps
-docker compose --project-directory docker --env-file .env -f docker/compose.yaml logs --tail=100
+sudo bash scripts/provision.sh status
 sudo bash scripts/provision.sh services
 ```
 

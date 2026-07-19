@@ -55,7 +55,7 @@ else
   fail "missing $CONFIG_FILE (copy .env.example first)"
 fi
 
-for variable_name in SERVER_HOSTNAME SERVER_USER ETH_IFACE ETH_ADDRESS GATEWAY DNS DISK_UUID MOUNT_POINT FS_TYPE MOUNT_OPTIONS SHARE_DIR SAMBA_USER; do
+for variable_name in SERVER_HOSTNAME SERVER_USER ETH_IFACE ETH_ADDRESS GATEWAY DNS DISK_UUID MOUNT_POINT FS_TYPE MOUNT_OPTIONS SHARE_DIR; do
   if [[ -v $variable_name ]] && [ -n "${!variable_name}" ]; then
     ok "$variable_name is configured"
   else
@@ -117,14 +117,29 @@ else
   fail "/dev/net/tun is unavailable for Tailscale"
 fi
 
-if [ -f "$CONFIG_FILE" ] && grep -Eq '^(TAILSCALE_AUTH_KEY|SAMBA_PASSWORD)=(|key|change_me|replace_me)$' "$CONFIG_FILE"; then
-  fail "$CONFIG_FILE still contains a service secret placeholder"
+compose_env_file=""
+if [ -f "$CONFIG_FILE" ]; then
+  compose_env_file=$(build_compose_env_file)
+  trap 'rm -f "$compose_env_file"' EXIT
+  load_env "$compose_env_file"
+
+  for variable_name in TAILSCALE_AUTH_KEY SAMBA_USER SAMBA_PASSWORD; do
+    if [[ -v $variable_name ]] && [ -n "${!variable_name}" ]; then
+      ok "$variable_name is configured"
+    else
+      fail "$variable_name is empty in Docker service env"
+    fi
+  done
+
+  if [ "${TAILSCALE_AUTH_KEY:-}" = "replace_me" ] || [ "${SAMBA_PASSWORD:-}" = "replace_me" ]; then
+    fail "Docker service env still contains a service secret placeholder"
+  fi
 fi
 
 if [ -f "$CONFIG_FILE" ] && docker compose \
-  --project-directory "$REPO_ROOT/docker" \
-  --env-file "$CONFIG_FILE" \
-  -f "$REPO_ROOT/docker/compose.yaml" \
+  --project-directory "$DOCKER_DIR" \
+  --env-file "$compose_env_file" \
+  -f "$DOCKER_DIR/compose.yaml" \
   config --quiet >/dev/null 2>&1; then
   ok "Docker Compose configuration is valid"
 else
