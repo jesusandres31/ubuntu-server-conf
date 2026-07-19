@@ -82,6 +82,7 @@ nano docker/tailscale/.env
 
 Replace `TAILSCALE_AUTH_KEY` with a valid reusable Tailscale auth key.
 Samba and Netdata can use their committed defaults unless you want to customize them.
+Use an auth key, not an API key; see [Tailscale notes](docker/tailscale/README.md).
 
 Do this before running `preflight` or `all`; those commands validate the final Docker environment.
 
