@@ -123,6 +123,8 @@ sudo bash scripts/provision.sh status
 ```
 
 Netdata is available on port `8080`. Samba publishes the `Compartido` share, and Tailscale uses host networking.
+If Windows rejects the Samba login after reusing the same server IP, see
+[Samba notes](docker/samba/README.md).
 
 ## Command reference
 
