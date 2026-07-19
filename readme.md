@@ -25,8 +25,7 @@ cd ~/ubuntu-server-conf
 
 ## 2. Configure
 
-Connect the external data disk before provisioning. This is the disk that will
-hold the NAS media and Samba share data.
+Connect the external data disk before provisioning. This is the disk that will hold the NAS media and Samba share data.
 
 Create the local host configuration:
 
@@ -84,8 +83,7 @@ nano docker/tailscale/.env
 Replace `TAILSCALE_AUTH_KEY` with a valid reusable Tailscale auth key.
 Samba and Netdata can use their committed defaults unless you want to customize them.
 
-Do this before running `preflight` or `all`; those commands validate the final
-Docker environment.
+Do this before running `preflight` or `all`; those commands validate the final Docker environment.
 
 ## 4. Bootstrap
 
