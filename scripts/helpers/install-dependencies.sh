@@ -14,6 +14,7 @@ source /etc/os-release
 [ "${ID:-}" = "ubuntu" ] || die "this bootstrap script supports Ubuntu only"
 [ -n "${SERVER_HOSTNAME:-}" ] || die "SERVER_HOSTNAME must be set in $CONFIG_FILE"
 [[ "$SERVER_HOSTNAME" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]] || die "invalid SERVER_HOSTNAME: $SERVER_HOSTNAME"
+SERVER_TIMEZONE="${SERVER_TIMEZONE:-Etc/UTC}"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -56,8 +57,10 @@ EOF
 fi
 
 hostnamectl set-hostname "$SERVER_HOSTNAME"
+timedatectl set-timezone "$SERVER_TIMEZONE"
 systemctl enable --now ssh docker
 
 echo "Bootstrap complete for $SERVER_HOSTNAME."
+timedatectl | grep 'Time zone'
 docker --version
 docker compose version

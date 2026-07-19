@@ -40,6 +40,7 @@ This repository already includes the expected ThinkCentre values:
 ```sh
 SERVER_HOSTNAME=thinkcenter
 SERVER_USER=ltc
+SERVER_TIMEZONE=America/Argentina/Buenos_Aires
 ETH_IFACE=eno1
 DISK_UUID=0C65-A654
 FS_TYPE=exfat
@@ -90,6 +91,7 @@ Do this before running `preflight` or `all`; those commands validate the final D
 ## 4. Bootstrap
 
 Install packages, configure Docker's official Ubuntu repository, enable SSH and Docker, and set the hostname:
+It also sets the server timezone from `SERVER_TIMEZONE`.
 
 ```sh
 sudo bash scripts/provision.sh bootstrap

@@ -44,7 +44,7 @@ else
   fail "/etc/os-release is not readable"
 fi
 
-for command_name in ip netplan blkid findmnt mountpoint awk install docker; do
+for command_name in ip netplan blkid findmnt mountpoint awk install timedatectl docker; do
   check_command "$command_name"
 done
 
@@ -55,7 +55,7 @@ else
   fail "missing $CONFIG_FILE (copy .env.example first)"
 fi
 
-for variable_name in SERVER_HOSTNAME SERVER_USER ETH_IFACE ETH_ADDRESS GATEWAY DNS DISK_UUID MOUNT_POINT FS_TYPE MOUNT_OPTIONS SHARE_DIR; do
+for variable_name in SERVER_HOSTNAME SERVER_USER SERVER_TIMEZONE ETH_IFACE ETH_ADDRESS GATEWAY DNS DISK_UUID MOUNT_POINT FS_TYPE MOUNT_OPTIONS SHARE_DIR; do
   if [[ -v $variable_name ]] && [ -n "${!variable_name}" ]; then
     ok "$variable_name is configured"
   else
@@ -67,6 +67,12 @@ if [ -n "${SERVER_USER:-}" ] && id "$SERVER_USER" >/dev/null 2>&1; then
   ok "server user exists: $SERVER_USER"
 else
   fail "SERVER_USER does not identify an existing account"
+fi
+
+if [ -n "${SERVER_TIMEZONE:-}" ] && timedatectl list-timezones | grep -Fx "$SERVER_TIMEZONE" >/dev/null 2>&1; then
+  ok "server timezone is valid: $SERVER_TIMEZONE"
+else
+  fail "SERVER_TIMEZONE is not a valid timezone"
 fi
 
 if [ -n "${ETH_IFACE:-}" ] && [ "$ETH_IFACE" != "REPLACE_WITH_INTERFACE" ] && ip link show "$ETH_IFACE" >/dev/null 2>&1; then
