@@ -46,9 +46,7 @@ password> your Mega password
 y/e/d> y
 ```
 
-If the Mega account has 2FA enabled, rclone may also ask for the current 2FA
-code. The Mega account must have been logged into at least once in a browser so
-Mega has generated its account encryption keys.
+If the Mega account has 2FA enabled, rclone may also ask for the current 2FA code. The Mega account must have been logged into at least once in a browser so Mega has generated its account encryption keys.
 
 After configuration, verify that the remote exists:
 
