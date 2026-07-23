@@ -59,8 +59,11 @@ fi
 hostnamectl set-hostname "$SERVER_HOSTNAME"
 timedatectl set-timezone "$SERVER_TIMEZONE"
 systemctl enable --now ssh docker
+groupadd -f docker
+usermod -aG docker "$SERVER_USER"
 
 echo "Bootstrap complete for $SERVER_HOSTNAME."
 timedatectl | grep 'Time zone'
 docker --version
 docker compose version
+echo "Docker group configured for $SERVER_USER. Log out and back in, or run: newgrp docker"

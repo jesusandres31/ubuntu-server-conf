@@ -90,14 +90,21 @@ Do this before running `preflight` or `all`; those commands validate the final D
 
 ## 4. Bootstrap
 
-Install packages, configure Docker's official Ubuntu repository, enable SSH and Docker, and set the hostname:
-It also sets the server timezone from `SERVER_TIMEZONE`.
+Install packages, configure Docker's official Ubuntu repository, enable SSH and Docker, set the hostname, set the timezone, and add `SERVER_USER` to the `docker` group.
 
 ```sh
 sudo bash scripts/provision.sh bootstrap
 ```
 
+After bootstrap, log out and back in so Docker group membership applies. To refresh the current shell instead:
+
+```sh
+newgrp docker
+docker ps
+```
+
 The Docker installation follows the official Ubuntu repository method from [Docker's installation guide](https://docs.docker.com/engine/install/ubuntu/).
+The Docker group allows running Docker without `sudo`; treat it as root-level access on this server.
 
 ## 5. Validate
 

@@ -69,6 +69,12 @@ else
   fail "SERVER_USER does not identify an existing account"
 fi
 
+if getent group docker >/dev/null 2>&1 && id -nG "$SERVER_USER" | tr ' ' '\n' | grep -Fx docker >/dev/null 2>&1; then
+  ok "server user belongs to docker group"
+else
+  warn "SERVER_USER is not in the docker group yet; run bootstrap, then log out and back in"
+fi
+
 if [ -n "${SERVER_TIMEZONE:-}" ] && timedatectl list-timezones | grep -Fx "$SERVER_TIMEZONE" >/dev/null 2>&1; then
   ok "server timezone is valid: $SERVER_TIMEZONE"
 else
