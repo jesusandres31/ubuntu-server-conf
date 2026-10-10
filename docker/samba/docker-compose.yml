@@ -2,6 +2,9 @@ services:
   samba:
     image: dperson/samba
     container_name: samba
+    environment:
+      USERID: "1000"
+      GROUPID: "1000"
     ports:
       - "137:137/udp"
       - "138:138/udp"
@@ -10,4 +13,4 @@ services:
     restart: unless-stopped
     volumes:
       - "${SHARE_DIR}:/media"
-    command: '-u "${SAMBA_USER};${SAMBA_PASSWORD}" -s "Compartido;/media;yes;no;no;${SAMBA_USER}"'
+    command: '-g "vfs objects = recycle" -u "${SAMBA_USER};${SAMBA_PASSWORD}" -s "Compartido;/media;yes;no;no;${SAMBA_USER}"'
