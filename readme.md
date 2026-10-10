@@ -9,7 +9,7 @@ It manages:
 - Docker Engine and Docker Compose
 - Static Netplan configuration
 - Persistent data-disk mounting
-- Samba, Tailscale, and Netdata containers
+- Samba, Tailscale, Netdata, and Syncthing containers
 - Mega backup with rclone
 - A local `projects/` directory for custom application repositories
 
@@ -73,6 +73,7 @@ Docker service defaults live beside each Compose file:
 docker/tailscale/.env.example
 docker/samba/.env.example
 docker/netdata/.env.example
+docker/syncthing/.env.example
 ```
 
 Only Tailscale needs a private value before provisioning:
@@ -84,6 +85,8 @@ nano docker/tailscale/.env
 
 Replace `TAILSCALE_AUTH_KEY` with a valid reusable Tailscale auth key.
 Samba and Netdata can use their committed defaults unless you want to customize them.
+Syncthing can also use its committed defaults; its vault directory and container
+user IDs are in `docker/syncthing/.env.example`.
 Use an auth key, not an API key; see [Tailscale notes](docker/tailscale/README.md).
 
 Do this before running `preflight` or `all`; those commands validate the final Docker environment.
@@ -133,7 +136,11 @@ sudo bash scripts/provision.sh all
 sudo bash scripts/provision.sh status
 ```
 
-Netdata is available on port `8080`. Samba publishes the `Compartido` share, and Tailscale uses host networking.
+Netdata is available on port `8080`. Samba publishes the `Compartido` share,
+Tailscale uses host networking, and Syncthing stores the server vault in
+`/mnt/ssd/smb/obsidian`. See [Syncthing notes](docker/syncthing/README.md) to pair
+your personal computers. Its web interface is only available locally on the
+server; use the documented SSH tunnel over Tailscale to open it remotely.
 If Windows rejects the Samba login after reusing the same server IP, see
 [Samba notes](docker/samba/README.md).
 
@@ -197,8 +204,8 @@ sudo bash scripts/provision.sh bootstrap    # Install packages, SSH, Docker, hos
 sudo bash scripts/provision.sh preflight    # Validate config before changing the host
 sudo bash scripts/provision.sh network      # Apply Netplan static network config
 sudo bash scripts/provision.sh storage      # Add the disk to /etc/fstab and mount it
-sudo bash scripts/provision.sh directories  # Create the Samba share directory
-sudo bash scripts/provision.sh services     # Start Samba, Tailscale, and Netdata
+sudo bash scripts/provision.sh directories  # Create Samba and Obsidian directories
+sudo bash scripts/provision.sh services     # Start Docker services
 sudo bash scripts/provision.sh backup-check # Validate rclone Mega backup config
 sudo bash scripts/provision.sh backup-dry-run
 sudo bash scripts/provision.sh backup-run

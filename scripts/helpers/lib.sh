@@ -60,8 +60,17 @@ build_compose_env_file() {
   append_env_file "$DOCKER_DIR/samba/.env" "$compose_env_file"
   append_env_file "$DOCKER_DIR/netdata/.env.example" "$compose_env_file"
   append_env_file "$DOCKER_DIR/netdata/.env" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/syncthing/.env.example" "$compose_env_file"
+  append_env_file "$DOCKER_DIR/syncthing/.env" "$compose_env_file"
 
   printf '%s\n' "$compose_env_file"
+}
+
+load_syncthing_config() {
+  load_env "$DOCKER_DIR/syncthing/.env.example"
+  if [ -f "$DOCKER_DIR/syncthing/.env" ]; then
+    load_env "$DOCKER_DIR/syncthing/.env"
+  fi
 }
 
 load_mega_backup_config() {

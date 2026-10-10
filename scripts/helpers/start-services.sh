@@ -20,11 +20,16 @@ load_env "$compose_env_file"
 
 mountpoint -q "$MOUNT_POINT" || die "$MOUNT_POINT is not mounted; refusing to start services"
 [ -d "$SHARE_DIR" ] || die "Samba directory does not exist: $SHARE_DIR"
-for variable_name in TAILSCALE_AUTH_KEY SAMBA_USER SAMBA_PASSWORD; do
+[ -d "${SYNCTHING_VAULT_DIR:-}" ] || die "Syncthing vault directory does not exist: ${SYNCTHING_VAULT_DIR:-empty}"
+for variable_name in TAILSCALE_AUTH_KEY SAMBA_USER SAMBA_PASSWORD SYNCTHING_PUID SYNCTHING_PGID SYNCTHING_VAULT_DIR; do
   if ! [[ -v $variable_name ]] || [ -z "${!variable_name}" ]; then
     die "$variable_name is empty in Docker service env"
   fi
 done
+
+if [[ ! "$SYNCTHING_PUID" =~ ^[0-9]+$ ]] || [[ ! "$SYNCTHING_PGID" =~ ^[0-9]+$ ]]; then
+  die "SYNCTHING_PUID and SYNCTHING_PGID must be numeric"
+fi
 
 if [ "${TAILSCALE_AUTH_KEY:-}" = "replace_me" ] || [ "${SAMBA_PASSWORD:-}" = "replace_me" ]; then
   die "Docker service env still contains an empty value or placeholder"

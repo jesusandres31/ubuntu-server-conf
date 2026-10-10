@@ -13,7 +13,7 @@ Commands:
   preflight    Validate the host, configuration, disk, and Docker
   network      Apply Netplan with an interactive rollback timer
   storage      Mount the configured data disk and update /etc/fstab
-  directories  Create the Samba directory on the data disk
+  directories  Create the Samba and Obsidian directories on the data disk
   services     Validate and start the Docker Compose services
   backup-check Validate the Mega backup configuration
   backup-dry-run

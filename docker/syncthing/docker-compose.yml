@@ -1,0 +1,21 @@
+services:
+  syncthing:
+    image: lscr.io/linuxserver/syncthing:latest
+    container_name: syncthing
+    hostname: ${SERVER_HOSTNAME}-syncthing
+    environment:
+      - PUID=${SYNCTHING_PUID}
+      - PGID=${SYNCTHING_PGID}
+      - TZ=${SERVER_TIMEZONE}
+    volumes:
+      - syncthing_config:/config
+      - "${SYNCTHING_VAULT_DIR}:/vault"
+    ports:
+      - "127.0.0.1:8384:8384"
+      - "22000:22000/tcp"
+      - "22000:22000/udp"
+      - "21027:21027/udp"
+    restart: unless-stopped
+
+volumes:
+  syncthing_config:

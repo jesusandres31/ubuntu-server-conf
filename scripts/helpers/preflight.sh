@@ -135,7 +135,7 @@ if [ -f "$CONFIG_FILE" ]; then
   trap 'rm -f "$compose_env_file"' EXIT
   load_env "$compose_env_file"
 
-  for variable_name in TAILSCALE_AUTH_KEY SAMBA_USER SAMBA_PASSWORD; do
+  for variable_name in TAILSCALE_AUTH_KEY SAMBA_USER SAMBA_PASSWORD SYNCTHING_PUID SYNCTHING_PGID SYNCTHING_VAULT_DIR; do
     if [[ -v $variable_name ]] && [ -n "${!variable_name}" ]; then
       ok "$variable_name is configured"
     else
@@ -146,6 +146,15 @@ if [ -f "$CONFIG_FILE" ]; then
   if [ "${TAILSCALE_AUTH_KEY:-}" = "replace_me" ] || [ "${SAMBA_PASSWORD:-}" = "replace_me" ]; then
     fail "Docker service env still contains a service secret placeholder"
   fi
+
+  if [[ ! "${SYNCTHING_PUID:-}" =~ ^[0-9]+$ ]] || [[ ! "${SYNCTHING_PGID:-}" =~ ^[0-9]+$ ]]; then
+    fail "SYNCTHING_PUID and SYNCTHING_PGID must be numeric"
+  fi
+
+  case "${SYNCTHING_VAULT_DIR:-}" in
+    "$MOUNT_POINT"/*) ok "SYNCTHING_VAULT_DIR is inside the data mount" ;;
+    *) fail "SYNCTHING_VAULT_DIR must be inside MOUNT_POINT" ;;
+  esac
 fi
 
 if [ -f "$CONFIG_FILE" ] && docker compose \
