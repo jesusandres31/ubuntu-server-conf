@@ -35,6 +35,10 @@ run_as_server_user() {
   runuser -u "$SERVER_USER" -- env HOME="$user_home" "$@"
 }
 
+if ! rclone help backends 2>/dev/null | grep -Eq '(^|[[:space:]])mega($|[[:space:]])'; then
+  die "installed rclone ($(rclone version 2>/dev/null | head -n 1)) has no mega backend. Run: sudo bash scripts/provision.sh bootstrap"
+fi
+
 remote_name="${BACKUP_REMOTE%%:*}:"
 if ! run_as_server_user rclone listremotes | grep -Fx "$remote_name" >/dev/null 2>&1; then
   die "rclone remote not found for $SERVER_USER: $remote_name. Run: rclone config"

@@ -21,6 +21,12 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y ca-certificates curl exfatprogs git iproute2 netplan.io openssh-server unzip util-linux
 
+# Ubuntu's rclone package is built without the mega backend and overwrites
+# /usr/bin/rclone on upgrades, so keep only the official binary.
+if dpkg-query -W -f='${db:Status-Status}' rclone 2>/dev/null | grep -qx installed; then
+  apt-get remove -y rclone
+fi
+
 if ! command -v rclone >/dev/null 2>&1 || ! rclone help backends 2>/dev/null | grep -Eq '(^|[[:space:]])mega($|[[:space:]])'; then
   curl -fsSL https://rclone.org/install.sh | bash
 fi
